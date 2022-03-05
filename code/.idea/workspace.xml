@@ -12,8 +12,149 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="282b2650-a853-4dbc-b5c9-92d6e4b6415d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/code.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/2021华为软件精英挑战赛-工程编译指导书-C&amp;C++-v1.0.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/2021华为软件精英挑战赛-工程编译指导书-Java-v1.0.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/2021华为软件精英挑战赛-工程编译指导书-Python-v1.0.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/CodeCraft-2021/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/CodeCraft-2021/CodeCraft-2021.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/CodeCraft_zip.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/bin/Debug/CodeCraft-2021.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/bin/Debug/CodeCraft-2021.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/bin/Release/CodeCraft-2021.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/.vs/CodeCraft-2021/v16/.suo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/.vs/CodeCraft-2021/v16/Browse.VC.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/.vs/CodeCraft-2021/v16/Solution.VC.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/.vs/CodeCraft-2021/v16/ipch/AutoPCH/7d882e0b796b97a2/CODECRAFT-2021.ipch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/.vs/CodeCraft-2021/v16/ipch/AutoPCH/edffae3b25df3ff0/CODECRAFT-2021.ipch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/.vs/cmake.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/ALL_BUILD.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/ALL_BUILD.vcxproj.filters" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/ALL_BUILD.vcxproj.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CMakeRCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/CompilerIdC.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/CompilerIdC.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CMakeCCompilerId.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CompilerIdC.exe.recipe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CompilerIdC.tlog/CL.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CompilerIdC.tlog/CL.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CompilerIdC.tlog/CL.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CompilerIdC.tlog/CompilerIdC.lastbuildstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CompilerIdC.tlog/link.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CompilerIdC.tlog/link.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdC/Debug/CompilerIdC.tlog/link.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/CompilerIdCXX.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/CompilerIdCXX.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CMakeCXXCompilerId.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CompilerIdCXX.exe.recipe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CompilerIdCXX.lastbuildstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/VCTargetsPath.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/VCTargetsPath.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/x64/Debug/VCTargetsPath.recipe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/3.18.0-rc2/x64/Debug/VCTargetsPath.tlog/VCTargetsPath.lastbuildstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/8fe1c769a5e34f6756e51d3d633f8de9/generate.stamp.rule" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/generate.stamp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/generate.stamp.depend" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CMakeFiles/generate.stamp.list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.exe.recipe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.ilk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/CL.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/CL.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/CL.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/CodeCraft-2021.lastbuildstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/CustomBuild.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/CustomBuild.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/CustomBuild.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/link.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/link.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Debug/CodeCraft-2021.tlog/link.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.exe.recipe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/CL.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/CL.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/CL.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/CodeCraft-2021.lastbuildstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/CustomBuild.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/CustomBuild.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/CustomBuild.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/link.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/link.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.dir/Release/CodeCraft-2021.tlog/link.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.vcxproj.filters" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/CodeCraft-2021.vcxproj.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/ZERO_CHECK.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/ZERO_CHECK.vcxproj.filters" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Debug/ZERO_CHECK/ZERO_CHECK.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Debug/ZERO_CHECK/ZERO_CHECK.recipe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Debug/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Debug/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Debug/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Debug/ZERO_CHECK/ZERO_CHECK.tlog/ZERO_CHECK.lastbuildstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Release/ZERO_CHECK/ZERO_CHECK.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Release/ZERO_CHECK/ZERO_CHECK.recipe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Release/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.command.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Release/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.read.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Release/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.write.1.tlog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build/x64/Release/ZERO_CHECK/ZERO_CHECK.tlog/ZERO_CHECK.lastbuildstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_C++/build_and_run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_java/CodeCraft_zip.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_java/bin/startup.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_java/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_java/build_and_run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_java/code/CodeCraft-2021/src/com/huawei/java/main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_java/makelist.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_python/CodeCraft-2021/src/CodeCraft-2021.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_python/CodeCraft_zip.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SDK/SDK_python/build_and_run.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CMakeRCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/CMakeCXXCompilerId.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/CMakeCXXCompilerId.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeError.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/code.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/code.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,13 +185,10 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../yanyixia/huawei/SDK/SDK/SDK_C++" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="code" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="code" TARGET_NAME="code" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="code" RUN_TARGET_NAME="code">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -71,6 +209,10 @@
       <option name="presentableId" value="Default" />
       <updated>1646302710315</updated>
       <workItem from="1646302713239" duration="98000" />
+      <workItem from="1646304977492" duration="1085000" />
+      <workItem from="1646459698910" duration="593000" />
+      <workItem from="1646461744071" duration="55000" />
+      <workItem from="1646470078440" duration="1746000" />
     </task>
     <servers />
   </component>
@@ -87,6 +229,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

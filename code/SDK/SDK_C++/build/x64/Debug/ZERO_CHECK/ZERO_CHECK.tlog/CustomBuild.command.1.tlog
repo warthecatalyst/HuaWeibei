@@ -1,0 +1,10 @@
+^E:\WORKSPACE\HUAWEIBEI\CODE\SDK\SDK_C++\BUILD\CMAKEFILES\8FE1C769A5E34F6756E51D3D633F8DE9\GENERATE.STAMP.RULE
+setlocal
+D:\Cmake\bin\cmake.exe -SE:/workspace/HuaWeibei/code/SDK/SDK_C++/CodeCraft-2021 -BE:/workspace/HuaWeibei/code/SDK/SDK_C++/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/workspace/HuaWeibei/code/SDK/SDK_C++/build/CodeCraft-2021.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
