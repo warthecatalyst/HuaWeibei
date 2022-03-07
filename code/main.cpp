@@ -66,6 +66,7 @@ ostream& operator<<(ostream& os,const VirtualM& virtualM){
 
 vector<Server> servers;
 unordered_map<string,VirtualM> virtualMap;
+unordered_map<int,VirtualM> id_to_virtualM;
 
 int main()
 {
@@ -96,7 +97,28 @@ int main()
 //    }
 
     cin>>T;
-    while(T--){
+    while(T--){ //T天
+        cin>>R;
+        while(R--){     //每一天的R条操作
+            string oper;
+            cin>>oper;
+            if(oper=="(add,"){
+                string name,ids;
+                cin>>name>>ids;
+                name = name.substr(0,name.size()-1);
+                int id = stoi(ids.substr(0,ids.size()-1));
+                VirtualM vm = virtualMap[name];
+                id_to_virtualM[id] = vm;
+            }else{
+                string id;
+                cin>>id;
+                id_to_virtualM.erase(stoi(id.substr(0,id.size()-1)));
+            }
+        }
+        //查看每天有多少台虚拟机
+        for(auto& it:id_to_virtualM){
+            cout<<it.first<<" "<<it.second<<endl;
+        }
     }
 
 	return 0;
