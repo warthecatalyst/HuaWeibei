@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/workspace/HuaWeibei/Preliminary/main.cpp
+iostream
+-
+fstream
+-
+vector
+-
+sstream
+-
+iomanip
+-
+string
+-
+cstring
+-
+list
+-
+map
+-
+unordered_map
+-
+set
+-
+unordered_set
+-
+algorithm
+-
+functional
+-
+memory
+-
+
