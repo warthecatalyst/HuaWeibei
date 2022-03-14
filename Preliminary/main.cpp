@@ -25,10 +25,9 @@ vector<vector<int>> demand; //demand[i][j]表示第i个时间节点，第j个客
 unordered_map<string,int> serverName_to_ID;
 vector<pair<string,int>> serverID_to_Val;
 
-//客户节点到边缘节点的时延
-vector<vector<int>> client_server_delay;
+//用于判断客户节点到边缘节点是否能够进行通讯
+vector<vector<bool>> client_server_connect;
 
-int QOS;    //最大可以承受的时延
 
 inline void ProcessClients(istringstream& is){     //主要是处理clientName_to_ID和clientID_to_Name
     string stn;
@@ -108,35 +107,6 @@ void ProcessInput(){
 //    }
 
     infile.close();
-    infile.open("data\\qos.csv");
-    if(!infile){
-        cout<<"Can't open file"<<endl;
-        exit(1);
-    }
-    getline(infile,line);
-    client_server_delay = vector<vector<int>>(clientID_to_Name.size(),vector<int>(serverID_to_Val.size()));
-    is.clear();
-    is.str(line);
-    vector<int> clientIDs = ProcessNames(is);
-    i = 0;
-    while(getline(infile,line)){
-        is.clear();
-        is.str(line);
-        string name,qos;
-        getline(is,name,',');
-        int j = 0,serverId = serverName_to_ID[name];
-        while(getline(is,qos,',')){
-            client_server_delay[j][serverId] = stoi(qos);
-            j++;
-        }
-    }
-//    for(auto& vec:client_server_delay){
-//        for(auto& val:vec){
-//            cout<<val<<" ";
-//        }
-//        cout<<endl;
-//    }
-    infile.close();
     infile.open("data\\config.ini");
     if(!infile){
         cout<<"Can't open file"<<endl;
@@ -149,12 +119,44 @@ void ProcessInput(){
     string qo;
     getline(is,qo,'=');
     getline(is,qo,'=');
-    QOS = stoi(qo);
+    int QOS = stoi(qo);
+
+
+    infile.close();
+    infile.open("data\\qos.csv");
+    if(!infile){
+        cout<<"Can't open file"<<endl;
+        exit(1);
+    }
+    getline(infile,line);
+    client_server_connect = vector<vector<bool>>(clientID_to_Name.size(),vector<bool>(serverID_to_Val.size()));
+    is.clear();
+    is.str(line);
+    vector<int> clientIDs = ProcessNames(is);
+    i = 0;
+    while(getline(infile,line)){
+        is.clear();
+        is.str(line);
+        string name,qos;
+        getline(is,name,',');
+        int j = 0,serverId = serverName_to_ID[name];
+        while(getline(is,qos,',')){
+            client_server_connect[j][serverId] = stoi(qos) < QOS;
+            j++;
+        }
+    }
+    for(auto& vec:client_server_connect){
+        for(auto val:vec){
+            cout<<val<<" ";
+        }
+        cout<<endl;
+    }
     clientName_to_ID.clear();
     serverName_to_ID.clear();
 }
 
 int main() {
-    ProcessInput(); //数据输入进行
+    ProcessInput(); //数据的输入处理
+
     return 0;
 }
