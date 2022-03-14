@@ -150,6 +150,8 @@ void ProcessInput(){
     getline(is,qo,'=');
     getline(is,qo,'=');
     QOS = stoi(qo);
+    clientName_to_ID.clear();
+    serverName_to_ID.clear();
 }
 
 int main() {
