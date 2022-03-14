@@ -30,7 +30,7 @@ vector<vector<int>> client_server_delay;
 
 int QOS;    //最大可以承受的时延
 
-void ProcessClients(istringstream& is){     //主要是处理clientName_to_ID和clientID_to_Name
+inline void ProcessClients(istringstream& is){     //主要是处理clientName_to_ID和clientID_to_Name
     string stn;
     getline(is,stn,',');
     int i = 0;
@@ -41,7 +41,7 @@ void ProcessClients(istringstream& is){     //主要是处理clientName_to_ID和
     }
 }
 
-vector<int> ProcessNames(istringstream& is){
+inline vector<int> ProcessNames(istringstream& is){
     vector<int> ans;
     string stn;
     getline(is,stn,',');
@@ -155,6 +155,6 @@ void ProcessInput(){
 }
 
 int main() {
-    ProcessInput();
+    ProcessInput(); //数据输入进行
     return 0;
 }
