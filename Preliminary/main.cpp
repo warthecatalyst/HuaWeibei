@@ -155,6 +155,20 @@ void ProcessInput(){
     serverName_to_ID.clear();
 }
 
+//将每个时间点按照所有客户的请求之和排序
+vector<int> sortDemands(){
+    vector<pair<int,int>> besorted;
+    for(int i=0;i<demand.size();i++){
+        int curNeed = 0;
+        for(int& j:demand[i]){
+            curNeed+=j;
+        }
+        besorted.emplace_back(i,curNeed);
+    }
+
+    sort(besorted.begin(),besorted.end(),)
+}
+
 int main() {
     ProcessInput(); //数据的输入处理
 
