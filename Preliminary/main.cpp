@@ -32,6 +32,8 @@ unordered_map<string,int> serverName_to_ID;
 vector<pair<string,int>> serverID_to_Val;
 vector<int> server_Best_Costs;
 vector<int> server_95per;  //上一轮迭代得到的95百分位带宽
+vector<int> server_50per;   //上一轮迭代得到的50百分位带宽值
+vector<vector<int>> last_round_low; //上一轮迭代中，少于50百分位带宽的集合
 
 vector<vector<int>> server_list;    //边缘节点的邻接链表
 vector<vector<int>> client_list;    //客户节点的邻接链表，现在可能暂时用不到，之后优化时候再考虑
@@ -120,6 +122,8 @@ void ProcessInput(){
     client_list = vector<vector<int>>(clientNum);
     server_Best_Costs = vector<int>(serverNum);
     server_95per = vector<int>(serverNum);
+    server_50per = vector<int>(serverNum);
+    last_round_low = vector<vector<int>>(demand.size());
 //    for(auto& vec:serverID_to_Val){
 //        cout<<vec.first<<" "<<vec.second<<endl;
 //    }
@@ -205,15 +209,17 @@ void output(vector<vector<vector<pair<int,int>>>>& ans){    //用于输出的函
             const auto& v1 = vec[i];
             clientID_to_Name[i].erase(std::remove(clientID_to_Name[i].begin(), clientID_to_Name[i].end(), '\r'), clientID_to_Name[i].end());
             outfile<<clientID_to_Name[i]<<":";
+            bool flag = false;
             for(int j = 0;j<v1.size();j++){
                 if(v1[j].second==0){
                     continue;
                 }
-                if(j>0){
+                if(flag){
                     outfile<<",";
                 }
                 const auto& v = v1[j];
                 outfile<<"<"<<serverID_to_Val[v.first].first<<","<<v.second<<">";
+                flag = true;
             }
             outfile<<endl;
         }
@@ -245,7 +251,7 @@ vector<int> sortDemands(){
         //cout<<p.first<<" "<<p.second<<endl;
         ans.push_back(p.first);
     }
-    int ten_percent = demand.size()/10;//   0.3 0.6 0.8 0.68 0.666 0.75 0.7 0.72(效果依次递增)
+    int ten_percent = demand.size()*0.73;//   0.3 0.6 0.8 0.68 0.666 0.75 0.7 0.72(效果依次递增)
     for(int i=0;i<serverNum;i++){
         sort(server_Costs[i].begin(),server_Costs[i].end(),greater<int>());
         server_Best_Costs[i] = server_Costs[i][ten_percent];
@@ -262,7 +268,12 @@ bool curDemandOver(vector<int>& curDemand){
     return true;
 }
 
-//试一试第一轮全部随机分配，将工作交给之后的轮次迭代
+double lastRoundPosition(vector<int>& seri,int lastRoundCost){
+    sort(seri.begin(),seri.end());
+    int pos = std::find(seri.begin(), seri.end(), lastRoundCost)-seri.begin()+1;
+    return (double)pos/(double)demand.size();
+}
+
 void solve(const vector<int>& sequence,vector<vector<int>>& serverTotal,vector<vector<int>>& record){   //用于求解第一轮的结果
     vector<vector<vector<pair<int,int>>>> ans(demand.size());              //最终记录的结果，目前可能不需要，但先暂时保存着
     vector<int> serverTimes(serverNum,five_percent);       //表示边缘节点还剩下多少次机会
@@ -282,39 +293,109 @@ void solve(const vector<int>& sequence,vector<vector<int>>& serverTotal,vector<v
         }
 
         while(!curDemandOver(curDemand)){
-            //直接全部随机分配
-            int clientId = 0;
-            for(int i=0;i<clientNum;i++){
-                if(curDemand[i]>0){
-                    clientId = i;
+            vector<int> server_Cost(serverNum,0); //处理到目前，每个边缘节点的负载(负载定义为边缘节点在当前时刻与其相邻的客户节点发出的请求)
+            //计算每个节点的负载
+
+            for(int i=0;i<serverNum;i++){
+                for(int& neigh:server_list[i]){
+                    server_Cost[i]+=curDemand[neigh];
+                }
+            }
+            sort(serverSort.begin(),serverSort.end(),[&](const int& a,const int &b){
+                return server_list[a].size()>server_list[b].size();
+            });
+
+
+            int serverId = -1;
+            for(int sId:serverSort){
+                if(serverTimes[sId]>0&&serverLoad[sId]>0){
+                    serverId = sId;
                     break;
                 }
             }
+
+            if(serverId==-1||server_Cost[serverId]==0){
+                //调试时输出
+//                cout<<"log1"<<endl;
+                //说明已经没有节点可以使用这次次数了，直接进行平均分配法
+                int clientId = 0;
+                for(int i=0;i<clientNum;i++){
+                    if(curDemand[i]>0){
+                        clientId = i;
+                        break;
+                    }
+                }
 //                cout<<"clientID :"<<clientID_to_Name[clientId]<<" ,its demands: "<<curDemand[clientId] << " ,and it's neighbours: "<<endl;
-            int neighLoad = 0;
-            for(int& neigh:client_list[clientId]){
-                neighLoad+=serverLoad[neigh];
+                int neighLoad = 0;
+                for(int& neigh:client_list[clientId]){
+                    neighLoad+=serverLoad[neigh];
 //                    cout<<serverID_to_Val[neigh].first<<" : "<<serverLoad[neigh]<<endl;
-            }
+                }
 //                cout<<endl;
 
-            double curN = curDemand[clientId];
-            for(int i = 0;i<client_list[clientId].size()&& curDemand[clientId]>0;i++){
-                int neigh = client_list[clientId][i];
-                if(serverLoad[neigh]==0){
-                    continue;
+                double curN = curDemand[clientId];
+                for(int i = 0;i<client_list[clientId].size()&& curDemand[clientId]>0;i++){
+                    int neigh = client_list[clientId][i];
+                    if(serverLoad[neigh]==0){
+                        continue;
+                    }
+                    double cL = (double)serverLoad[neigh]/(double)neighLoad;
+                    int cuL = ceil(cL*(double)curN);    //向上取整
+                    if(cuL>curDemand[clientId]){
+                        cuL = curDemand[clientId];
+                    }
+                    if(cuL>serverLoad[neigh]){
+                        cuL = serverLoad[neigh];
+                    }
+                    curDemand[clientId]-=cuL;
+                    serverLoad[neigh]-=cuL;
+                    curAns[clientId].push_back({neigh,cuL});
                 }
-                double cL = (double)serverLoad[neigh]/(double)neighLoad;
-                int cuL = ceil(cL*(double)curN);    //向上取整
-                if(cuL>curDemand[clientId]){
-                    cuL = curDemand[clientId];
+            }else{
+                int curNeed = server_Cost[serverId];
+                if(curNeed>=server_Best_Costs[serverId]){    //使用这一次的机会
+                    serverTimes[serverId]--;    //用掉一次次数，然后就尽量把该节点分配出去
+                    record[day].push_back(serverId);
+                    for(int& client:server_list[serverId]){
+                        if(serverLoad[serverId]==0){
+                            break;
+                        }
+                        int minV = min(curDemand[client],serverLoad[serverId]);
+                        curDemand[client]-=minV;
+                        serverLoad[serverId]-=minV;
+                        curAns[client].push_back({serverId,minV});
+                    }
+                }else{  //如果不使用次数，就将节点的负载按加权比例均分到与他相连的边缘节点（其边缘节点还剩下多少）
+                    int clientId = 0;
+                    for(int& neigh:server_list[serverId]){
+                        if(curDemand[neigh]>0){
+                            clientId = neigh;
+                            break;
+                        }
+                    }
+                    int neighLoad = 0;
+                    for(int& neigh:client_list[clientId]){
+                        neighLoad+=serverLoad[neigh];
+                    }
+                    double curN = curDemand[clientId];
+                    for(int i = 0;i<client_list[clientId].size()&& curDemand[clientId]>0;i++){
+                        int neigh = client_list[clientId][i];
+                        if(serverLoad[neigh]==0){
+                            continue;
+                        }
+                        double cL = (double)serverLoad[neigh]/(double)neighLoad;
+                        int cuL = ceil(cL*(double)curN);    //向上取整
+                        if(cuL>curDemand[clientId]){
+                            cuL = curDemand[clientId];
+                        }
+                        if(cuL>serverLoad[neigh]){
+                            cuL = serverLoad[neigh];
+                        }
+                        curDemand[clientId]-=cuL;
+                        serverLoad[neigh]-=cuL;
+                        curAns[clientId].push_back({neigh,cuL});
+                    }
                 }
-                if(cuL>serverLoad[neigh]){
-                    cuL = serverLoad[neigh];
-                }
-                curDemand[clientId]-=cuL;
-                serverLoad[neigh]-=cuL;
-                curAns[clientId].push_back({neigh,cuL});
             }
         }
 //        cout<<"current day is: "<<day<<endl;
@@ -342,6 +423,12 @@ void solve(const vector<int>& sequence,vector<vector<int>>& serverTotal,vector<v
         vector<int> seri = serverTotal[i];
         sort(seri.begin(),seri.end());  //从小到大排序
         server_95per[i] = seri[demand.size()-1-five_percent];   //取得一轮的p95值
+        server_50per[i] = seri[seri.size()*0.5-1];
+        for(int day = 0;day<demand.size();day++){
+            if(lastRoundPosition(seri,serverTotal[i][day])<0.5){
+                last_round_low[day].push_back(i);
+            }
+        }
 #ifdef Debug
         for(int j : seri){
             cout<<j<<" ";
@@ -358,15 +445,25 @@ void solve(const vector<int>& sequence,vector<vector<int>>& serverTotal,vector<v
 #endif
 }
 
-void furtherImprovement(const vector<int>& sequence,vector<vector<int>>& serverTotal,vector<vector<int>>& record,bool isLastRound = false){    //之后的进步轮次
+bool checkServerNeighbours(int sId,vector<int>& curDemand){
+    for(int& neigh:server_list[sId]){
+        if(curDemand[neigh]>0){
+            return true;
+        }
+    }
+    return false;
+}
+
+void furtherImprovement(const vector<int>& sequence,vector<vector<int>>& serverTotal,vector<vector<int>>& record,bool Positive,bool isLastRound = false){    //之后的进步轮次
     vector<vector<vector<pair<int,int>>>> ans(demand.size());              //最终记录的结果
     vector<int> serverTimes(serverNum,five_percent);       //表示边缘节点还剩下多少次机会
     for(const int& day:sequence){
-        for(int serverId:record[day]){  //因为上一轮分配的这一轮还得分配，所以必须先把次数减掉
-            serverTimes[serverId]--;
+        for(int sId:record[day]){
+            serverTimes[sId]--;
         }
     }
-    for(int day = 0;day<demand.size();day++){   //同样按照天数进行处理
+
+    for(const int& day:sequence){   //同样按照天数进行处理
         vector<int> curDemand = demand[day];
         vector<vector<pair<int,int>>> curAns(clientNum);  //当前这轮的结果
         vector<int> serverLoad(serverNum);     //这轮所剩的负载
@@ -375,7 +472,7 @@ void furtherImprovement(const vector<int>& sequence,vector<vector<int>>& serverT
         }
 
         //把上一轮已经用过的先用了
-        for(int serverId:record[day]){  //已经记录过次数
+        for(int serverId:record[day]){
             for(int& client:server_list[serverId]){
                 if(serverLoad[serverId]==0){
                     break;
@@ -386,8 +483,8 @@ void furtherImprovement(const vector<int>& sequence,vector<vector<int>>& serverT
                 curAns[client].push_back({serverId,minV});
             }
         }
-        unordered_set<int> rec(record[day].begin(),record[day].end());
-        //再遍历上一轮没有使用但是大于P95的节点
+        unordered_set<int> rec(record[day].begin(),record[day].end());  //在该日已经使用过次数的服务器
+        //再查看是否有上一轮没有使用但是大于P95的节点，全部使用
         vector<int> prepare;
         for(int i=0;i<serverNum;i++){
             if(serverTimes[i]>0&&!rec.count(i)&&serverTotal[i][day]>server_95per[i]){
@@ -404,12 +501,13 @@ void furtherImprovement(const vector<int>& sequence,vector<vector<int>>& serverT
                 server_Cost[pId] = pCost;
             }
             sort(prepare.begin(),prepare.end(),[&](const int& a,const int& b){
-                return (double)server_Cost[a]/(double)server_95per[a]<(double)server_Cost[b]/(double)server_95per[b];
+                return server_Cost[a]<server_Cost[b];
             });
-            if(!prepare.empty()&&serverTimes[prepare.back()]>0&&server_Cost[prepare.back()]>server_95per[prepare.back()]){   //用掉一次次数
+            if(!prepare.empty()&&serverTimes[prepare.back()]>0&&server_Cost[prepare.back()]>server_95per[prepare.back()]){   //在还能使用次数的情况下优先使用次数
                 int serverId = prepare.back();
                 serverTimes[serverId]--;
                 record[day].push_back(serverId);
+                rec.insert(serverId);
                 prepare.pop_back();
                 for(int& client:server_list[serverId]){
                     if(serverLoad[serverId]==0){
@@ -421,38 +519,103 @@ void furtherImprovement(const vector<int>& sequence,vector<vector<int>>& serverT
                     curAns[client].push_back({serverId,minV});
                 }
             }else{
-                //平均分配
-                int clientId = 0;
-                for(int i=0;i<clientNum;i++){
-                    if(curDemand[i]>0){
-                        clientId = i;
+                //按照剩余服务器的50百分位带宽给值，找到还有剩余节点没有满足的服务器，之前已经使用过次数的服务器不再考虑
+                int serverId = -1;
+                while(!last_round_low[day].empty()){    //优先使用上一轮所用小于50%的节点
+                    int sId = last_round_low[day].back();
+                    last_round_low[day].pop_back();
+                    if(checkServerNeighbours(sId,curDemand)){
+                        serverId = sId;
                         break;
                     }
                 }
-//                cout<<"clientID :"<<clientID_to_Name[clientId]<<" ,its demands: "<<curDemand[clientId] << " ,and it's neighbours: "<<endl;
-                int neighLoad = 0;
-                for(int& neigh:client_list[clientId]){
-                    neighLoad+=serverLoad[neigh];
-//                    cout<<serverID_to_Val[neigh].first<<" : "<<serverLoad[neigh]<<endl;
+                if(serverId==-1){
+                    if(Positive){   //正向遍历
+                        for(int i = 0;i<serverNum;i++){
+                            if(rec.count(i)){
+                                continue;
+                            }
+                            for(int client:server_list[i]){
+                                if(curDemand[client]>0){
+                                    serverId = i;
+                                    break;
+                                }
+                            }
+                            if(serverId==i){
+                                break;
+                            }
+                        }
+                    }else{  //反向遍历
+                        for(int i = serverNum-1;i>=0;i--){
+                            if(rec.count(i)){
+                                continue;
+                            }
+                            for(int client:server_list[i]){
+                                if(curDemand[client]>0){
+                                    serverId = i;
+                                    break;
+                                }
+                            }
+                            if(serverId==i){
+                                break;
+                            }
+                        }
+                    }
                 }
-//                cout<<endl;
-                double curN = curDemand[clientId];
-                for(int i = 0;i<client_list[clientId].size()&& curDemand[clientId]>0;i++){
-                    int neigh = client_list[clientId][i];
-                    if(serverLoad[neigh]==0){
-                        continue;
+                if(serverId==-1){   //说明已经实在没有节点可分配了
+                    int clientId = 0;
+                    for(int i=0;i<clientNum;i++){
+                        if(curDemand[i]>0){
+                            clientId = i;
+                            break;
+                        }
                     }
-                    double cL = (double)serverLoad[neigh]/(double)neighLoad;
-                    int cuL = ceil(cL*(double)curN);    //向上取整
-                    if(cuL>curDemand[clientId]){
-                        cuL = curDemand[clientId];
+                    int neighLoad = 0;
+                    for(int& neigh:client_list[clientId]){
+                        neighLoad+=serverLoad[neigh];
                     }
-                    if(cuL>serverLoad[neigh]){
-                        cuL = serverLoad[neigh];
+                    double curN = curDemand[clientId];
+                    for(int i = 0;i<client_list[clientId].size()&& curDemand[clientId]>0;i++){
+                        int neigh = client_list[clientId][i];
+                        if(serverLoad[neigh]==0){
+                            continue;
+                        }
+                        double cL = (double)serverLoad[neigh]/(double)neighLoad;
+                        int cuL = ceil(cL*(double)curN);    //向上取整
+                        if(cuL>curDemand[clientId]){
+                            cuL = curDemand[clientId];
+                        }
+                        if(cuL>serverLoad[neigh]){
+                            cuL = serverLoad[neigh];
+                        }
+                        curDemand[clientId]-=cuL;
+                        serverLoad[neigh]-=cuL;
+                        curAns[clientId].push_back({neigh,cuL});
                     }
-                    curDemand[clientId]-=cuL;
-                    serverLoad[neigh]-=cuL;
-                    curAns[clientId].push_back({neigh,cuL});
+                }else{
+                    //找到节点的50带宽值
+                    rec.insert(serverId);
+                    int MaxiGive = server_50per[serverId];
+                    //将Maxigive按照需求平均分配给他的客户节点
+                    int clientNeed = 0;
+                    for(int& client:server_list[serverId]){
+                        clientNeed += curDemand[client];
+                    }
+                    int serLeft = MaxiGive;
+                    for(int& client:server_list[serverId]){
+                        double cL = (double)curDemand[client]/(double)clientNeed;
+                        int cuL = ceil(cL*(double)MaxiGive);
+                        if(cuL>curDemand[client]){
+                            cuL = curDemand[client];
+                        }
+                        if(cuL>serLeft){
+                            cuL = serLeft;
+                        }
+                        serLeft-=cuL;
+                        curDemand[client]-=cuL;
+                        serverLoad[serverId]-=cuL;
+                        curAns[client].push_back({serverId,cuL});
+                    }
                 }
             }
         }
@@ -461,39 +624,56 @@ void furtherImprovement(const vector<int>& sequence,vector<vector<int>>& serverT
             serverTotal[i][day] = serverID_to_Val[i].second-serverLoad[i];
         }
     }
-
+    int last = 0,totalUse = 0;
     for(int i=0;i<serverNum;i++){
+#ifdef Debug
+        cout<<serverID_to_Val[i].first<<":";
+#endif
         vector<int> seri = serverTotal[i];
         sort(seri.begin(),seri.end());  //从小到大排序
         server_95per[i] = seri[demand.size()-1-five_percent];   //取得一轮的p95值
+        server_50per[i] = seri[seri.size()*0.5-1];
+        for(int day = 0;day<demand.size();day++){
+            if(lastRoundPosition(seri,serverTotal[i][day])<0.5){
+                last_round_low[day].push_back(i);
+            }
+        }
+#ifdef Debug
+        for(int j : seri){
+            cout<<j<<" ";
+        }
+        cout<<"final Cost:"<<seri[demand.size()-1-five_percent]<<endl;
+        totalUse+=five_percent-serverTimes[i];
+        cout<<"times Used:"<<five_percent-serverTimes[i]<<endl;
+        last+=seri[demand.size()-1-five_percent];
+#endif
     }
-
+#ifdef Debug
+    cout<<"Total Cost = "<<last<<endl;
+    cout<<"Total Use = "<<totalUse<<endl;
+#endif
     if(isLastRound){
         output(ans);
-
         int last = 0,totalUse = 0;
         for(int i=0;i<serverNum;i++){
-#ifdef Debug
             cout<<serverID_to_Val[i].first<<":";
-#endif
             vector<int> seri = serverTotal[i];
             sort(seri.begin(),seri.end());  //从小到大排序
             server_95per[i] = seri[demand.size()-1-five_percent];   //取得一轮的p95值
-#ifdef Debug
             for(int j : seri){
-                cout<<j<<" ";
-            }
-            cout<<"final Cost:"<<seri[demand.size()-1-five_percent]<<endl;
-            totalUse+=five_percent-serverTimes[i];
-            cout<<"times Used:"<<five_percent-serverTimes[i]<<endl;
-            last+=seri[demand.size()-1-five_percent];
-#endif
+            cout<<j<<" ";
         }
-#ifdef Debug
+        cout<<"final Cost:"<<seri[demand.size()-1-five_percent]<<endl;
+        totalUse+=five_percent-serverTimes[i];
+        cout<<"times Used:"<<five_percent-serverTimes[i]<<endl;
+        last+=seri[demand.size()-1-five_percent];
+        }
         cout<<"Total Cost = "<<last<<endl;
         cout<<"Total Use = "<<totalUse<<endl;
-#endif
     }
+#ifdef Debug
+    system("pause");
+#endif
 }
 
 
@@ -502,7 +682,7 @@ void furtherImprovement(const vector<int>& sequence,vector<vector<int>>& serverT
 int main() {
 //    clock_t startTime,endTime;
 //    startTime = clock();
-    const int MAXRound = 100;
+    const int MAXRound = 20;
     ProcessInput(); //数据的输入处理
     vector<int> sequence = sortDemands();   //将每一天按照当天的请求总和排序，形成结果sequence
     vector<vector<int>> record(demand.size());
@@ -514,13 +694,11 @@ int main() {
     solve(sequence,serverTotal,record);
     round++;
     for(;round<MAXRound;round++){
-#ifdef Debug
         cout<<"current round is "<<round<<endl;
-#endif
         if(round==MAXRound-1){
-            furtherImprovement(sequence,serverTotal,record, true);
+            furtherImprovement(sequence,serverTotal,record, round%2==1,true);
         }else{
-            furtherImprovement(sequence,serverTotal,record);
+            furtherImprovement(sequence,serverTotal,record,round%2==1);
         }
     }
 
