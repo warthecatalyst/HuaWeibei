@@ -319,11 +319,3 @@ int main() {
     printf("%lld",ans);
     return 0;
 }
-New paste
-Please log in to create a paste.
-
-Log in
-
-© 2022 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.
-Legal info
-Go to the top of the page
