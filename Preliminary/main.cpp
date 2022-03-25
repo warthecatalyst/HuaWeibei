@@ -18,8 +18,9 @@
 #include <cmath>
 #include <queue>
 #include <stack>
+#include <random>
 
-#define Debug 1
+// #define Debug 1
 // #define Debug1 1
 
 using namespace std;
@@ -433,11 +434,12 @@ bool notEndLoop(vector<int>& leftvec,vector<int>& rightvec){
 }
 
 void solve(vector<int>& serverMax){
+    auto demand_to_use = demand;
     Network_Flow networkFlow;
     vector<int> serverTimes(serverNum,five_percent);
-    vector<vector<int>> serverTotal(serverNum,vector<int>(demand.size()));
+    vector<vector<int>> serverTotal(serverNum,vector<int>(Times));
     //最终记录的结果
-    vector<vector<vector<pair<int,int>>>> ans(demand.size(),vector<vector<pair<int,int>>>(clientNum));
+    vector<vector<vector<pair<int,int>>>> ans(Times,vector<vector<pair<int,int>>>(clientNum));
     vector<int> serverSort;                                         //用于排序的数组
     serverSort.reserve(serverNum);
     vector<int> serverLoad_a(serverNum);
@@ -450,12 +452,13 @@ void solve(vector<int>& serverMax){
         serverSort.push_back(i);
     }
     vector<int> dailyDemands(Times,0);
+    vector<unordered_set<int>> record(Times);
     vector<int> sequence;
     sequence.reserve(Times);
     for(int day = 0;day<Times;day++){
         sequence.push_back(day);
         for(int j = 0;j<clientNum;j++){
-            dailyDemands[day]+=demand[day][j];
+            dailyDemands[day]+=demand_to_use[day][j];
         }
     }
 
@@ -464,7 +467,7 @@ void solve(vector<int>& serverMax){
 //        cout<<"current day is "<<curDay<<endl;
 //        cout<<"Before using an opportunity, current day demand is "<<dailyDemands[curDay]<<endl;
         vector<int> serverCost(serverNum,0);
-        vector<int>& curDemand = demand[curDay];
+        vector<int>& curDemand = demand_to_use[curDay];
         vector<int>& serverLoad = serverLoads[curDay];
         auto &curAns = ans[curDay];
         if(curDemandOver(curDemand)){   //光靠用次数就分完了
@@ -492,6 +495,7 @@ void solve(vector<int>& serverMax){
         }
         //用掉一次次数
         serverTimes[serverId]--;
+        record[curDay].insert(serverId);
         int curNeed = 0;
         for(int& client:server_list[serverId]){
             curNeed+=curDemand[client];
@@ -516,43 +520,62 @@ void solve(vector<int>& serverMax){
     }
 
     for(int day = 0;day<Times;day++){
-        vector<int>& curDemand = demand[day];
+        vector<int>& curDemand = demand_to_use[day];
         vector<int>& serverLoad = serverLoads[day];
         auto &curAns = ans[day];
-        while(!curDemandOver(demand[day])){
-            //随机分
-            int clientId = 0;
+        if(dailyDemands[day]>0){
+            vector<int> leftVec(serverNum),rightVec(serverNum);
+            unordered_set<int> le;
             for(int i=0;i<clientNum;i++){
                 if(curDemand[i]>0){
-                    clientId = i;
-                    break;
+                    for(int& j:client_list[i]){
+                        if(record[day].count(j)){
+                            continue;
+                        }
+                        le.insert(j);
+                    }
                 }
             }
-//                cout<<"clientID :"<<clientID_to_Name[clientId]<<" ,its demands: "<<curDemand[clientId] << " ,and it's neighbours: "<<endl;
-            int neighLoad = 0;
-            for(int& neigh:client_list[clientId]){
-                neighLoad+=serverLoad[neigh];
-//                    cout<<serverID_to_Val[neigh].first<<" : "<<serverLoad[neigh]<<endl;
+            for(int i=0;i<serverNum;i++){
+                if(le.count(i)){
+                    leftVec[i] = 0;
+                    rightVec[i] = serverMax[i]-(serverID_to_Val[i].second-serverLoads[day][i]);
+                }else{
+                    leftVec[i] = rightVec[i] = 0;
+                }
             }
-//                cout<<endl;
-
-            double curN = curDemand[clientId];
-            for(int i = 0;i<client_list[clientId].size()&& curDemand[clientId]>0;i++){
-                int neigh = client_list[clientId][i];
-                if(serverLoad[neigh]==0){
-                    continue;
+            bool flag = false;
+            while(notEndLoop(leftVec,rightVec)){
+                networkFlow.init();
+                vector<int> mid(serverNum);
+                for(int i=0;i<serverNum;i++){
+                    mid[i] = (leftVec[i]+rightVec[i])/2;
                 }
-                double cL = (double)serverLoad[neigh]/(double)neighLoad;
-                int cuL = ceil(cL*(double)curN);    //向上取整
-                if(cuL>curDemand[clientId]){
-                    cuL = curDemand[clientId];
+                int res = network_flow_solve(networkFlow,curDemand,serverLoad,mid);
+                if(res==dailyDemands[day]){
+                    for(int i=0;i<serverNum;i++){
+                        rightVec[i] = mid[i];
+                    }
+                    flag = true;
+                }else{
+                    for(int i=0;i<serverNum;i++){
+                        leftVec[i] = mid[i]+1;
+                    }
+                    flag = false;
                 }
-                if(cuL>serverLoad[neigh]){
-                    cuL = serverLoad[neigh];
+            }
+            if(!flag){
+                int res = network_flow_solve(networkFlow,curDemand,serverLoad,rightVec);
+            }
+            //记录网络流的结果
+            for(int i=0;i<clientNum;i++){
+                for(int j=0;j<serverNum;j++){
+                    if(networkFlow.ans[i][j]==0){
+                        continue;
+                    }
+                    serverLoads[day][j]-=networkFlow.ans[i][j];
+                    curAns[i].push_back({j,networkFlow.ans[i][j]});
                 }
-                curDemand[clientId]-=cuL;
-                serverLoad[neigh]-=cuL;
-                curAns[clientId].push_back({neigh,cuL});
             }
         }
     }
@@ -576,16 +599,16 @@ void solve(vector<int>& serverMax){
         }
         int k = 0;
         int count = 0;
-        for(int i=0;i<demand.size()-1-five_percent;++i){
-            k += seri[i];
+        for(int l=0;l<demand.size()-1-five_percent;++l){
+            k += seri[l];
             count ++;
         }
         cout<<"avg: "<<k/count<<endl;
         cout<<"final Cost:"<<seri[demand.size()-1-five_percent]<<endl;
         totalUse+=five_percent-serverTimes[i];
         cout<<"times Used:"<<five_percent-serverTimes[i]<<endl;
-        last+=seri[demand.size()-1-five_percent];
 #endif
+        last+=seri[demand.size()-1-five_percent];
     }
 #ifdef Debug
     cout<<"Total Cost = "<<last<<endl;
@@ -597,10 +620,15 @@ void solve(vector<int>& serverMax){
 int main() {
 //    clock_t startTime,endTime;
 //    startTime = clock();
+    default_random_engine engine;// 随机数生成引擎
+    engine.seed(time(NULL)); //初始化种子
+
+    //输入处理
     ProcessInput(); //数据的输入处理
     vector<int> serverMax(serverNum);
     average_distribution(serverMax);
 
+    //随机的循环
     solve(serverMax);
 //    endTime = clock();
 //    cout << "The run time is: " <<(double)(endTime - startTime)*1000 / CLOCKS_PER_SEC << "ms" << endl;
