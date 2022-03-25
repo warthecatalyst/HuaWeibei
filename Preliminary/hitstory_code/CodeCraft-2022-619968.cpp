@@ -229,32 +229,83 @@ bool curDemandOver(vector<int>& curDemand){
     return true;
 }
 
-
-void solve(vector<int>& sequence){
+void mysolve() {
+    vector<int> sequence = sortDemands();
+    int times = sequence.size();
     vector<vector<vector<pair<int,int>>>> ans(demand.size());       //最终结果
-#ifdef Debug
-    vector<vector<int>> serverTotal(serverNum,vector<int>(demand.size()));  //用于计算最终成本
-#endif
     vector<int> serverTimes(serverNum,five_percent);       //表示边缘节点还剩下多少次机会
     vector<int> serverSort;                                         //用于排序的数组
     serverSort.reserve(serverNum);
     for(int i=0;i<serverID_to_Val.size();i++){
         serverSort.push_back(i);
     }
-
-    for(const int& day:sequence){
+    while(times--) {
+        int day = sequence[0];
         vector<int>& curDemand = demand[day];
-
         vector<vector<pair<int,int>>> curAns(clientNum);  //当前这轮的结果
         vector<int> serverLoad(serverNum);     //这轮所剩的负载
         for(int i=0;i<serverNum;i++){
             serverLoad[i] = serverID_to_Val[i].second;
         }
-
         while(!curDemandOver(curDemand)){//先把在本时刻会用掉次数的节点的次数用掉
             vector<int> server_Cost(serverNum); //处理到目前，每个边缘节点的负载(负载定义为边缘节点在当前时刻与其相邻的客户节点发出的请求)
             //计算每个节点的负载
-
+            for(int i=0;i<serverNum;i++){
+                for(int& neigh:server_list[i]){
+                    server_Cost[i]+=curDemand[neigh];
+                }
+            }
+            sort(serverSort.begin(),serverSort.end(),[&](const int& a,const int &b){
+                return server_Cost[a]>server_Cost[b];
+            });
+            int serverId = -1;
+            for(int sId:serverSort){
+                if(serverTimes[sId]>0&&serverLoad[sId]>0 && serverTimes[sId]>0){
+                    serverId = sId;
+                    break;
+                }
+            }
+            if(serverId==-1){
+                break;
+            }
+            int curNeed = server_Cost[serverId];
+            if(serverTimes[serverId]>0){    //使用这一次的机会
+                serverTimes[serverId]--;    //用掉一次次数，然后就尽量把该节点分配出去
+                int usedV = 0;
+                for(int& client:server_list[serverId]){
+                    if(serverLoad[serverId]==0){
+                        break;
+                    }
+                    int minV = min(curDemand[client],serverLoad[serverId]);
+                    curDemand[client]-=minV;
+                    serverLoad[serverId]-=minV;
+                    usedV += minV;
+                    curAns[client].push_back({serverId,minV});
+                }
+                continue;
+            }
+        }
+     
+    }
+}
+void solve(vector<int>& sequence){
+    vector<vector<vector<pair<int,int>>>> ans(demand.size());       //最终结果
+    vector<int> serverTimes(serverNum,five_percent);       //表示边缘节点还剩下多少次机会
+    vector<int> serverSort;                                         //用于排序的数组
+    serverSort.reserve(serverNum);
+    for(int i=0;i<serverID_to_Val.size();i++){
+        serverSort.push_back(i);
+    }
+    for(const int& day:sequence){
+        vector<int>& curDemand = demand[day];
+        vector<vector<pair<int,int>>> curAns(clientNum);  //当前这轮的结果
+        vector<int> serverLoad(serverNum);     //这轮所剩的负载
+        for(int i=0;i<serverNum;i++){
+            serverLoad[i] = serverID_to_Val[i].second;
+        }
+        while(!curDemandOver(curDemand)){//先把在本时刻会用掉次数的节点的次数用掉
+            vector<int> server_Cost(serverNum); //处理到目前，每个边缘节点的负载(负载定义为边缘节点在当前时刻与其相邻的客户节点发出的请求)
+            //计算每个节点的负载
             for(int i=0;i<serverNum;i++){
                 for(int& neigh:server_list[i]){
                     server_Cost[i]+=curDemand[neigh];
