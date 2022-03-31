@@ -1,0 +1,3 @@
+"D:\app\CLion\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\QuaterFinal.dir/objects.a
+E:\Download\MINGW\mingw64\bin\ar.exe cr CMakeFiles\QuaterFinal.dir/objects.a @CMakeFiles\QuaterFinal.dir\objects1.rsp
+E:\Download\MINGW\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\QuaterFinal.dir/objects.a -Wl,--no-whole-archive -o QuaterFinal.exe -Wl,--out-implib,libQuaterFinal.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\QuaterFinal.dir\linklibs.rsp

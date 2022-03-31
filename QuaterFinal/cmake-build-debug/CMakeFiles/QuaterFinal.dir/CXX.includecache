@@ -6,10 +6,16 @@
 
 #IncludeRegexTransform: 
 
-E:/workspace/HuaWeibei/Preliminary/main.cpp
+E:/workspace/HuaWeibei/QuaterFinal/ProcessInput.h
+global.h
+E:/workspace/HuaWeibei/QuaterFinal/global.h
+
+E:/workspace/HuaWeibei/QuaterFinal/global.h
 iostream
 -
 fstream
+-
+utility
 -
 vector
 -
@@ -51,4 +57,8 @@ random
 -
 chrono
 -
+
+E:/workspace/HuaWeibei/QuaterFinal/main.cpp
+ProcessInput.h
+E:/workspace/HuaWeibei/QuaterFinal/ProcessInput.h
 

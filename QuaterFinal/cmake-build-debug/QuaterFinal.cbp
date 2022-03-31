@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="QuaterFinal"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="QuaterFinal">
+				<Option output="E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/QuaterFinal.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 QuaterFinal"/>
+					<CompileFile command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="QuaterFinal/fast">
+				<Option output="E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/QuaterFinal.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="E:/Download/MINGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 QuaterFinal/fast"/>
+					<CompileFile command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Download/MINGW/mingw64/bin/mingw32-make.exe -f &quot;E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/ProcessInput.h">
+			<Option target="QuaterFinal"/>
+		</Unit>
+		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/global.h">
+			<Option target="QuaterFinal"/>
+		</Unit>
+		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/main.cpp">
+			<Option target="QuaterFinal"/>
+		</Unit>
+		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
