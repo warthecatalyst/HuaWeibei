@@ -1,5 +1,11 @@
-#include "global.h" 
-#include "try2average.h"
+//
+// Created by war on 2022/4/1.
+//
+
+#ifndef QUATERFINAL_PROCESS_P5_H
+#define QUATERFINAL_PROCESS_P5_H
+
+#include "global.h"
 
 bool CompBandwith(int s1, int s2){
     return serverID_to_Val[s1].second>serverID_to_Val[s2].second;
@@ -23,7 +29,7 @@ void UseOutServer(int serverId, int time, vector<vector<unordered_map<string,int
     while(!request_queue.empty()){
         auto it = request_queue.top();
         request_queue.pop();
-        
+
         if(bandwith_remain[time][serverId]>=it.need&&it.need>0){
             bandwith_remain[time][serverId] -= it.need;
             result[time][it.clientId][it.streamId] = serverId;
@@ -72,3 +78,5 @@ void Process_p5(vector<vector<unordered_map<string,int>>> &demand_remain, vector
         }
     }
 }
+
+#endif //QUATERFINAL_PROCESS_P5_H

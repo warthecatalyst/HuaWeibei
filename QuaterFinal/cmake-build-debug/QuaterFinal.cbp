@@ -83,6 +83,9 @@
 		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/ProcessInput.h">
 			<Option target="QuaterFinal"/>
 		</Unit>
+		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/Process_p5.h">
+			<Option target="QuaterFinal"/>
+		</Unit>
 		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/global.h">
 			<Option target="QuaterFinal"/>
 		</Unit>

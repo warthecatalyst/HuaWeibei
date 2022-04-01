@@ -1,5 +1,5 @@
 #include "ProcessInput.h"
-#include "Process_p5.cpp"
+#include "Process_p5.h"
 #include "try2average.h"
 
 void solve(){
