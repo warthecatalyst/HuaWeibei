@@ -89,6 +89,9 @@
 		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/main.cpp">
 			<Option target="QuaterFinal"/>
 		</Unit>
+		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/try2average.h">
+			<Option target="QuaterFinal"/>
+		</Unit>
 		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -43,7 +43,7 @@ struct stream_request{
     stream_request(string sid,int cid,int n):streamId(std::move(sid)),clientId(cid),need(n){}
 
     bool operator<(const stream_request& b) const{
-        return need>b.need;
+        return need<b.need;
     }
 };
 
