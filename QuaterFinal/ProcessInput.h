@@ -180,5 +180,45 @@ void ProcessInput(){
     }
 }
 
+void output(vector<vector<unordered_map<string,int>>>& ans){
+    ofstream outfile(prefix+"output/solution.txt",ios::out);
+    if(!outfile){
+        cout<<"Can't open output file"<<endl;
+        exit(1);
+    }
+
+    for(const auto& vec:ans){
+        //第i个时刻的输出结果
+        for(int i = 0;i<vec.size();i++){
+            //v1代表一个客户节点的分配策略
+            const auto& v1 = vec[i];
+            clientID_to_Name[i].erase(std::remove(clientID_to_Name[i].begin(), clientID_to_Name[i].end(), '\r'), clientID_to_Name[i].end());
+            outfile<<clientID_to_Name[i]<<":";  //customerID
+            bool flag = false;
+            unordered_map<int,vector<string>> curAns;   //按照边缘节点->流的分配
+            for(auto& it:v1){
+                if(!curAns.count(it.second)){
+                    curAns[it.second] = vector<string>(0);
+                    curAns[it.second].push_back(it.first);
+                }else{
+                    curAns[it.second].push_back(it.first);
+                }
+            }
+            for(auto& item:curAns){
+                if(flag){
+                    outfile<<',';
+                }
+                outfile<<'<'<<serverID_to_Val[item.first].first;    //site_id
+                for(auto& str:item.second){ //streamID
+                    outfile<<","<<str;
+                }
+                outfile<<'>';
+                flag = true;
+            }
+            outfile<<endl;
+        }
+    }
+    outfile.close();
+}
 
 #endif //QUATERFINAL_PROCESSINPUT_H
