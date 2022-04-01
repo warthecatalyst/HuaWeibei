@@ -4,12 +4,14 @@
 
 #ifndef QUATERFINAL_TRY2AVERAGE_H
 #define QUATERFINAL_TRY2AVERAGE_H
-#include "ProcessInput.h"
+#include "global.h"
 
 bool curDemandOver(vector<unordered_map<string,int>>& curDemand){
-    for(const int& d:curDemand){
-        if(d.second>0){
-            return false;
+    for(const auto& mp:curDemand){
+        for(const auto& d:mp){
+            if(d.second>0){
+                return false;
+            }
         }
     }
     return true;
@@ -33,9 +35,8 @@ double calCostAdd(int sId,double curUsed,double willUse){
 }
 
 //input:最外层表示的是每个不同的时刻，中间表示不同的client，最内层的unordered_map则表示流ID->数据
-vector<vector<unordered_map<string,int>>> try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<vector<int>> &restServers) {
+void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<vector<int>> &restServers,vector<vector<unordered_map<string,int>>>& ans) {
     vector<int> server_95per = vector<int>(serverNum,0);//记录每个边缘节点当前p95
-    vector<vector<unordered_map<string,int>>> ans(demand.size(),vector<unordered_map<string,int>>(clientNum));  //第t天第i个客户节点的第k个流是否分配给第j个边缘节点
     for (int t = 0; t < Times; t++) {
         vector<unordered_map<string,int>>& curDemand = restDemands[t];
         vector<int>& curServer = restServers[t];
@@ -70,7 +71,7 @@ vector<vector<unordered_map<string,int>>> try2average(vector<vector<unordered_ma
             }
             //如果当前最大流分配后都超过了所有边缘节点的p95,则计算增加成本，分配给增加成本最小的边缘节点，并更新它的p95
             if (!flag) {
-                pair<int, double> minValue(-1, INT_MAX32);//(边缘节点Id, 最小值)
+                pair<int, double> minValue(-1, INT32_MAX);//(边缘节点Id, 最小值)
                 // //方案1：
                 // for(auto& sId: client_list[curStream.clientId]) {
                 //     if (curServer[sId] >= curStream.need && server_95per[sId] < curStream.need) {
@@ -83,7 +84,7 @@ vector<vector<unordered_map<string,int>>> try2average(vector<vector<unordered_ma
                 // }
                 //方案2：计算增加需求的成本最低的节点
                 for(auto& sId: client_list[curStream.clientId]) {
-                    if (curServer[sId] >= curStream) {
+                    if (curServer[sId] >= curStream.need) {
                         double costAdd = calCostAdd(sId,server_95per[sId],serverID_to_Val[sId].second-curServer[sId]+curStream.need);
                         if(costAdd< minValue.second){
                             minValue.second = costAdd;
@@ -100,7 +101,6 @@ vector<vector<unordered_map<string,int>>> try2average(vector<vector<unordered_ma
             }
         }
     }
-    return ans;
 }
 
 

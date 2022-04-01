@@ -1,11 +1,14 @@
 #include "ProcessInput.h"
 #include "Process_p5.cpp"
+#include "try2average.h"
 
 void solve(){
     auto demand_remain = demand;
     vector<vector<unordered_map<string,int>>> result;
     vector<vector<int>> bandwith_remain;
+#ifdef Debug
     cout<<bandwith_remain.size()<<endl;
+#endif
     for(int t=0;t<Times;++t){
         vector<int> v;
         for(int serverId=0;serverId<serverNum;++serverId){
@@ -20,8 +23,8 @@ void solve(){
         result.push_back(result_item);
     }
     Process_p5(demand_remain, bandwith_remain, result);
-
-
+    try2average(demand_remain,bandwith_remain,result);
+    output(result);
 }
 
 

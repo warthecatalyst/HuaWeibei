@@ -3,5 +3,7 @@
 
 CMakeFiles/QuaterFinal.dir/main.cpp.obj: \
  ../ProcessInput.h \
+ ../Process_p5.cpp \
  ../global.h \
- ../main.cpp
+ ../main.cpp \
+ ../try2average.h
