@@ -175,7 +175,8 @@ void ProcessInput(){
     //对于每一个客户节点，将他的邻接链表按照最大带宽进行排序，优先分配给带宽更大的节点
     for(int i=0;i<clientNum;i++){
         sort(client_list[i].begin(),client_list[i].end(),[&](const int& a,const int& b){
-            return serverID_to_Val[a].second>serverID_to_Val[b].second;
+            return serverID_to_Val[a].second/(double)server_list[a].size() > serverID_to_Val[b].second/(double)server_list[b].size();
+            //return serverID_to_Val[a].second<serverID_to_Val[b].second;
         });
     }
 }

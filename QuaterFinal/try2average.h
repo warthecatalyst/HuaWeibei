@@ -17,6 +17,20 @@ bool curDemandOver(vector<unordered_map<string,int>>& curDemand){
     return true;
 }
 
+void CulCost(vector<int> server_p95){
+    int sum = 0;
+    for(int i=0;i<serverNum;++i){
+        int temp = V;
+        if(server_p95[i]>V){
+            temp = (server_p95[i]-V)*(server_p95[i]-V)/serverID_to_Val[i].second+server_p95[i];
+        }
+        sum += temp;
+    }
+    cout<<"total cost: "<<sum<<endl;
+    
+}
+
+
 //服务器的Id，服务器的P95用量，以及即将需要用到的需求
 double calCostAdd(int sId,double curUsed,double willUse){
     double lastCost;
@@ -58,17 +72,36 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
             stream_request curStream = pq_curAllStreams.top();
             pq_curAllStreams.pop();
             bool flag = false;
-            //如果当前最大流k被分配后没有超过当前边缘节点sId的p95，则分配给边缘节点sId；
+            int best_server = -1;
+            int max_remain = -1;
             for(auto& sId: client_list[curStream.clientId]) {
                 int curUsed = serverID_to_Val[sId].second - curServer[sId]; //当前已经使用的部分
                 if (curServer[sId] >= curStream.need && server_95per[sId] >= curStream.need+curUsed) {
-                    curServer[sId] -= curStream.need;                                   //更新服务器剩余带宽
-                    curDemand[curStream.clientId][curStream.streamId]-=curStream.need;      //更新当前的需求，分配完成的需求不再考虑
-                    ans[t][curStream.clientId][curStream.streamId] = sId;//记录结果
-                    flag = true;
-                    break;
+                    if(server_95per[sId] - curStream.need-curUsed >max_remain){
+                        best_server = sId;
+                        max_remain = server_95per[sId] - curStream.need-curUsed;
+                        flag = true;
+                    }
                 }
             }
+            if(flag){
+                curServer[best_server] -= curStream.need;                                   //更新服务器剩余带宽
+                curDemand[curStream.clientId][curStream.streamId]-=curStream.need;      //更新当前的需求，分配完成的需求不再考虑
+                ans[t][curStream.clientId][curStream.streamId] = best_server;//记录结果
+            }
+            
+            // //如果当前最大流k被分配后没有超过当前边缘节点sId的p95，则分配给边缘节点sId；
+            // for(auto& sId: client_list[curStream.clientId]) {
+            //     int curUsed = serverID_to_Val[sId].second - curServer[sId]; //当前已经使用的部分
+            //     if (curServer[sId] >= curStream.need && server_95per[sId] >= curStream.need+curUsed) {
+            //         curServer[sId] -= curStream.need;                                   //更新服务器剩余带宽
+            //         curDemand[curStream.clientId][curStream.streamId]-=curStream.need;      //更新当前的需求，分配完成的需求不再考虑
+            //         ans[t][curStream.clientId][curStream.streamId] = sId;//记录结果
+            //         flag = true;
+            //         break;
+            //     }
+            // }
+
             //如果当前最大流分配后都超过了所有边缘节点的p95,则计算增加成本，分配给增加成本最小的边缘节点，并更新它的p95
             if (!flag) {
                 pair<int, double> minValue(-1, INT32_MAX);//(边缘节点Id, 最小值)
@@ -101,7 +134,9 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
             }
         }
     }
+    // CulCost(server_95per);
 }
+
 
 
 #endif //QUATERFINAL_TRY2AVERAGE_H
