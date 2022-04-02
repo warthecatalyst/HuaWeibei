@@ -26,7 +26,7 @@ double calCostAdd(int sId,double curUsed,double willUse){
         lastCost = curUsed+(1/(double)serverID_to_Val[sId].second)*(curUsed-V)*(curUsed-V);
     }
     double finalCost;
-    if(finalCost<=V){
+    if(willUse<=V){
         finalCost = V;
     }else{
         finalCost = willUse+(1/(double)serverID_to_Val[sId].second)*(willUse-V)*(willUse-V);
@@ -74,11 +74,11 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
                 pair<int, double> minValue(-1, INT32_MAX);//(边缘节点Id, 最小值)
                 // //方案1：
                 // for(auto& sId: client_list[curStream.clientId]) {
-                //     if (curServer[sId] >= curStream.need && server_95per[sId] < curStream.need) {
-                //         int temp = (server_95per[sId] - V) / serverID_to_Val[sId];
+                //     if (curServer[sId] >= curStream.need && server_95per[sId] < serverID_to_Val[sId].second-curServer[sId]+curStream.need) {
+                //         int temp = (server_95per[sId] - V) / serverID_to_Val[sId].second;
                 //         if (minValue.second > temp){
                 //             minValue.first = sId;
-                //             minValue.second = temp
+                //             minValue.second = temp;
                 //         }
                 //     }
                 // }
