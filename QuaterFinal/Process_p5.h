@@ -69,7 +69,10 @@ void Process_p5(vector<vector<unordered_map<string,int>>> &demand_remain, vector
     for(int i=0;i<serverNum;++i){
         serverSort.push_back(i);
     }
-    sort(serverSort.begin(), serverSort.end(), CompBandwith);
+    sort(serverSort.begin(), serverSort.end(), [&](const int& a,const int& b){
+        return serverID_to_Val[a].second>serverID_to_Val[b].second;
+    });
+
     for(auto serverId:serverSort){
         vector<pair<int, int>> sequence = SortTimeByMaxStream(serverId, demand_remain);
         for(int k=0;k<five_percent;++k){
