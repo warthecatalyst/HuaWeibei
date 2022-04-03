@@ -167,5 +167,4 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
 #endif
     }
 }
-
 #endif //QUATERFINAL_TRY2AVERAGE_H

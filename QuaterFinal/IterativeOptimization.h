@@ -39,17 +39,27 @@ void OptimizeOneServer(vector<vector<unordered_map<string,int>>>& ans, int serve
         bool flag = false;
         int cost_today = server_total[t][serverId];
         while(!requests.empty()){
-            stream_request_test re = requests.top();
+            flag = false;
+            stream_request re = requests.top();
             requests.pop();
+            int best_server = -1;
+            int max_remain = -1;
             for(int otherServer:client_list[re.clientId]){
                 if(otherServer != serverId && server_p95[otherServer]>=server_total[t][otherServer]+re.need){
                     //cout<<re.need<<endl;
-                    ans[t][re.clientId][re.streamId] = otherServer;
-                    server_total[t][serverId] -= re.need;
-                    server_total[t][otherServer] += re.need;
-                    flag = true;
-                    break;
+                    if(server_p95[otherServer]-server_total[t][otherServer]-re.need>max_remain){
+                        max_remain = server_p95[otherServer]-server_total[t][otherServer]-re.need;
+                        best_server = otherServer;
+                    }
                 }
+            }
+
+            if(best_server!=-1){
+                ans[t][re.clientId][re.streamId] = best_server;
+                server_total[t][serverId] -= re.need;
+                server_total[t][best_server] += re.need;
+                flag = true;
+                break;
             }
             // if(flag)
             //     break;
