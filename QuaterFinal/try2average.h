@@ -5,6 +5,7 @@
 #ifndef QUATERFINAL_TRY2AVERAGE_H
 #define QUATERFINAL_TRY2AVERAGE_H
 #include "global.h"
+#include "IterativeOptimization.h"
 
 bool curDemandOver(vector<unordered_map<string,int>>& curDemand){
     for(const auto& mp:curDemand){
@@ -27,7 +28,6 @@ void CulCost(vector<int> server_p95){
         sum += temp;
     }
     cout<<"total cost: "<<sum<<endl;
-    
 }
 
 
@@ -46,6 +46,21 @@ double calCostAdd(int sId,double curUsed,double willUse){
         finalCost = willUse+(1/(double)serverID_to_Val[sId].second)*(willUse-V)*(willUse-V);
     }
     return finalCost-lastCost;
+}
+
+vector<vector<int>> GetServerTotal(vector<vector<unordered_map<string,int>>>& ans){
+    
+    vector<vector<int>> server_total;
+    for(int t =0;t<Times;++t){
+        vector<int> v(serverNum, 0);
+        for(int clientId=0;clientId<clientNum;++clientId){
+            for(auto s:ans[t][clientId]){
+                v[s.second] += demand[t][clientId][s.first];
+            }
+        }
+        server_total.push_back(v);
+    }
+    return server_total;
 }
 
 //input:最外层表示的是每个不同的时刻，中间表示不同的client，最内层的unordered_map则表示流ID->数据
@@ -81,7 +96,7 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
                         best_server = sId;
                         max_remain = server_95per[sId] - curStream.need-curUsed;
                         flag = true;
-                    }
+                    } 
                 }
             }
             if(flag){
@@ -132,9 +147,26 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
                     server_95per[sId] = serverID_to_Val[sId].second - curServer[sId] + curStream.need;//更新sId的当前p95
                 }
             }
+            
         }
     }
-    // CulCost(server_95per);
+// #ifdef DEBUG
+    cout<<"--------------befor-------------"<<endl;
+    CulCost(server_95per);
+
+    cout<<"---------------after-------------"<<endl;
+// #endif
+    for(int l=0;l<1;++l){
+        auto server_total = GetServerTotal(ans);
+        for(int i=0;i<serverNum;++i){
+            OptimizeOneServer(ans,i, server_95per, server_total);
+        }
+        CulCost(server_95per);
+    }
+    
+// #ifdef DEBUG
+    
+// #endif
 }
 
 
