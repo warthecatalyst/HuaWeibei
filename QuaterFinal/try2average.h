@@ -17,6 +17,20 @@ bool curDemandOver(vector<unordered_map<string,int>>& curDemand){
     return true;
 }
 
+void CulCost(vector<int> server_p95){
+    int sum = 0;
+    for(int i=0;i<serverNum;++i){
+        int temp = V;
+        if(server_p95[i]>V){
+            temp = (server_p95[i]-V)*(server_p95[i]-V)/serverID_to_Val[i].second+server_p95[i];
+        }
+        sum += temp;
+    }
+    cout<<"total cost: "<<sum<<endl;
+    
+}
+
+
 //服务器的Id，服务器的P95用量，以及即将需要用到的需求
 double calCostAdd(int sId,double curUsed,double willUse){
     double lastCost;
@@ -57,51 +71,47 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
         while (!pq_curAllStreams.empty()) {
             stream_request curStream = pq_curAllStreams.top();
             pq_curAllStreams.pop();
-            bool flag = false;
-            //如果当前最大流k被分配后没有超过当前边缘节点sId的p95，则分配给边缘节点sId；
+            pair<int, double> minValue(-1, INT32_MAX);//(边缘节点Id, 最小值)
+            // //方案1：
+            // for(auto& sId: client_list[curStream.clientId]) {
+            //     if (curServer[sId] >= curStream.need && server_95per[sId] < serverID_to_Val[sId].second-curServer[sId]+curStream.need) {
+            //         int temp = (server_95per[sId] - V) / serverID_to_Val[sId].second;
+            //         if (minValue.second > temp){
+            //             minValue.first = sId;
+            //             minValue.second = temp;
+            //         }
+            //     }
+            // }
+            //方案2：计算增加需求的成本最低的节点
             for(auto& sId: client_list[curStream.clientId]) {
-                int curUsed = serverID_to_Val[sId].second - curServer[sId]; //当前已经使用的部分
-                if (curServer[sId] >= curStream.need && server_95per[sId] >= curStream.need+curUsed) {
-                    curServer[sId] -= curStream.need;                                   //更新服务器剩余带宽
-                    curDemand[curStream.clientId][curStream.streamId]-=curStream.need;      //更新当前的需求，分配完成的需求不再考虑
-                    ans[t][curStream.clientId][curStream.streamId] = sId;//记录结果
-                    flag = true;
-                    break;
-                }
-            }
-            //如果当前最大流分配后都超过了所有边缘节点的p95,则计算增加成本，分配给增加成本最小的边缘节点，并更新它的p95
-            if (!flag) {
-                pair<int, double> minValue(-1, INT32_MAX);//(边缘节点Id, 最小值)
-                // //方案1：
-                // for(auto& sId: client_list[curStream.clientId]) {
-                //     if (curServer[sId] >= curStream.need && server_95per[sId] < serverID_to_Val[sId].second-curServer[sId]+curStream.need) {
-                //         int temp = (server_95per[sId] - V) / serverID_to_Val[sId].second;
-                //         if (minValue.second > temp){
-                //             minValue.first = sId;
-                //             minValue.second = temp;
-                //         }
-                //     }
-                // }
-                //方案2：计算增加需求的成本最低的节点
-                for(auto& sId: client_list[curStream.clientId]) {
-                    if (curServer[sId] >= curStream.need) {
-                        double costAdd = calCostAdd(sId,server_95per[sId],serverID_to_Val[sId].second-curServer[sId]+curStream.need);
-                        if(costAdd< minValue.second){
-                            minValue.second = costAdd;
-                            minValue.first = sId;
-                        }
+                if (curServer[sId] >= curStream.need) {
+                    double costAdd = calCostAdd(sId,serverID_to_Val[sId].second-curServer[sId],serverID_to_Val[sId].second-curServer[sId]+curStream.need);
+                    if(costAdd< minValue.second){
+                        minValue.second = costAdd;
+                        minValue.first = sId;
                     }
                 }
-                if(minValue.first != -1) {
-                    int sId = minValue.first;
-                    curServer[sId] -= curStream.need;//更新服务器剩余带宽
-                    ans[t][curStream.clientId][curStream.streamId] = sId;//记录结果
-                    server_95per[sId] = serverID_to_Val[sId].second - curServer[sId] + curStream.need;//更新sId的当前p95
-                }
+            }
+            if(minValue.first != -1) {
+                int sId = minValue.first;
+                curServer[sId] -= curStream.need;//更新服务器剩余带宽
+                ans[t][curStream.clientId][curStream.streamId] = sId;//记录结果
             }
         }
     }
+#ifdef Debug1
+    vector<vector<int>> serverTotal(serverNum,vector<int>(Times));
+    for(int i = 0;i<serverNum;i++){
+        for(int day = 0;day<Times;day++){
+            serverTotal[i][day] = serverID_to_Val[i].second-restServers[day][i];
+        }
+        sort(serverTotal[i].begin(),serverTotal[i].end(),greater<int>());
+        server_95per[i] = serverTotal[i][five_percent];
+    }
+    CulCost(server_95per);
+#endif
 }
+
 
 
 #endif //QUATERFINAL_TRY2AVERAGE_H

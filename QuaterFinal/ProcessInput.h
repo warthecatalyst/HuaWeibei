@@ -63,7 +63,9 @@ void ProcessInput(){
         getline(is,streamId,',');
         int i = 0;
         while(getline(is,stn,',')){
-            curTimeDemand[i++][streamId] = stoi(stn);
+            int stream_mount = stoi(stn);
+            Max_Stream = max(stream_mount,Max_Stream);
+            curTimeDemand[i++][streamId] = stream_mount;
         }
     }
     demand.push_back(curTimeDemand);        //最后一个时刻不能忘记导入

@@ -29,7 +29,8 @@
 #include <random>
 #include <chrono>
 
-//#define Debug 1
+// #define Debug 1
+#define Debug1 1
 
 using namespace std;
 using ll = long long;
@@ -55,6 +56,7 @@ int V;
 //总共的时刻，边缘节点的数目和客户的数目
 int Times, serverNum,clientNum;
 int five_percent;   //5%的次数
+int Max_Stream = 0; //最大的流
 
 vector<string> clientID_to_Name;
 vector<vector<unordered_map<string,int>>> demand;

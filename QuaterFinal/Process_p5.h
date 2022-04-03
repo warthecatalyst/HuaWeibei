@@ -7,6 +7,9 @@
 
 #include "global.h"
 
+double param = 0.5;
+int boundary = round(param*Max_Stream);
+
 bool CompBandwith(int s1, int s2){
     return serverID_to_Val[s1].second>serverID_to_Val[s2].second;
 }
@@ -69,6 +72,7 @@ void Process_p5(vector<vector<unordered_map<string,int>>> &demand_remain, vector
     for(int i=0;i<serverNum;++i){
         serverSort.push_back(i);
     }
+
     sort(serverSort.begin(), serverSort.end(), [&](const int& a,const int& b){
         return serverID_to_Val[a].second>serverID_to_Val[b].second;
     });
