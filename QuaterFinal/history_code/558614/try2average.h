@@ -73,18 +73,18 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
             continue;
 
         //将所有的流从大到小排序
-        priority_queue<stream_request> pq_curAllStreams;
+        priority_queue<stream_request_test> pq_curAllStreams;
         for (int i = 0; i < curDemand.size(); i++) {
             for (auto& k: curDemand[i]) {
                 if(k.second==0){
                     continue;
                 }
-                pq_curAllStreams.push(stream_request(k.first, i, k.second));
+                pq_curAllStreams.push(stream_request_test(k.first, i, k.second));
             }
         }
 
         while (!pq_curAllStreams.empty()) {
-            stream_request curStream = pq_curAllStreams.top();
+            stream_request_test curStream = pq_curAllStreams.top();
             pq_curAllStreams.pop();
             bool flag = false;
             int best_server = -1;

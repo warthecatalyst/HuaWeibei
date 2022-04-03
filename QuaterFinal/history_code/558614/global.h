@@ -35,7 +35,7 @@
 using namespace std;
 using ll = long long;
 
-const string prefix = "";
+const string prefix = "/";
 
 //基本消耗为V
 int V;
@@ -61,8 +61,8 @@ struct stream_request{
     stream_request(string sid,int cid,int n):streamId(std::move(sid)),clientId(cid),need(n){}
 
     bool operator<(const stream_request& b) const{
-        return need < b.need ;
-        //return need / client_list[clientId].size() < b.need / client_list[b.clientId].size();
+        //return need < b.need ;
+        return need / client_list[clientId].size() < b.need / client_list[b.clientId].size();
     }
 };
 
