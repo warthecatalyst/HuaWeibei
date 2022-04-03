@@ -1,5 +1,5 @@
 //
-// Created by war on 2022/4/3.
+// Created by war on 2022/3/31.
 //
 
 #ifndef QUATERFINAL_GLOBAL_H
@@ -35,7 +35,7 @@
 using namespace std;
 using ll = long long;
 
-const string prefix = "";
+const string prefix = "/";
 
 //基本消耗为V
 int V;
@@ -78,5 +78,4 @@ struct stream_request_test{
         return need < b.need ;
     }
 };
-
 #endif //QUATERFINAL_GLOBAL_H

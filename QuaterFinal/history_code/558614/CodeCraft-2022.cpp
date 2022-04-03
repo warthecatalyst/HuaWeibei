@@ -29,11 +29,10 @@ void solve(){
 
 
 int main() {
-
+    
     ProcessInput();
     solve();
-
+    
 
     return 0;
 }
-

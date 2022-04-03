@@ -1,10 +1,9 @@
 //
-// Created by war on 2022/4/3.
+// Created by war on 2022/4/1.
 //
 
 #ifndef QUATERFINAL_TRY2AVERAGE_H
 #define QUATERFINAL_TRY2AVERAGE_H
-
 #include "global.h"
 #include "IterativeOptimization.h"
 
@@ -167,5 +166,7 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
 #endif
     }
 }
+
+
 
 #endif //QUATERFINAL_TRY2AVERAGE_H
