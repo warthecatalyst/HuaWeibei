@@ -128,29 +128,29 @@ QuaterFinal/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\QuaterFinal.dir\build.make CMakeFiles/QuaterFinal.dir/build
 .PHONY : QuaterFinal/fast
 
-main.obj: main.cpp.obj
-.PHONY : main.obj
+CodeCraft-2022.obj: CodeCraft-2022.cpp.obj
+.PHONY : CodeCraft-2022.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\QuaterFinal.dir\build.make CMakeFiles/QuaterFinal.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+CodeCraft-2022.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\QuaterFinal.dir\build.make CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.obj
+.PHONY : CodeCraft-2022.cpp.obj
 
-main.i: main.cpp.i
-.PHONY : main.i
+CodeCraft-2022.i: CodeCraft-2022.cpp.i
+.PHONY : CodeCraft-2022.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\QuaterFinal.dir\build.make CMakeFiles/QuaterFinal.dir/main.cpp.i
-.PHONY : main.cpp.i
+CodeCraft-2022.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\QuaterFinal.dir\build.make CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.i
+.PHONY : CodeCraft-2022.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+CodeCraft-2022.s: CodeCraft-2022.cpp.s
+.PHONY : CodeCraft-2022.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\QuaterFinal.dir\build.make CMakeFiles/QuaterFinal.dir/main.cpp.s
-.PHONY : main.cpp.s
+CodeCraft-2022.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\QuaterFinal.dir\build.make CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.s
+.PHONY : CodeCraft-2022.cpp.s
 
 # Help Target
 help:
@@ -161,9 +161,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... QuaterFinal
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... CodeCraft-2022.obj
+	@echo ... CodeCraft-2022.i
+	@echo ... CodeCraft-2022.s
 .PHONY : help
 
 

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "E:/workspace/HuaWeibei/QuaterFinal/main.cpp" "E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/CMakeFiles/QuaterFinal.dir/main.cpp.obj"
+  "E:/workspace/HuaWeibei/QuaterFinal/CodeCraft-2022.cpp" "E:/workspace/HuaWeibei/QuaterFinal/cmake-build-debug/CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -1,7 +1,14 @@
+//
+// Created by war on 2022/4/3.
+//
+
+#ifndef QUATERFINAL_ITERATIVEOPTIMIZATION_H
+#define QUATERFINAL_ITERATIVEOPTIMIZATION_H
+
 #include "global.h"
 void IterativeOprimize(vector<int> server_p95, vector<vector<int>> server_total){
     for(int t=0;t<Times;++t){
-        
+
     }
 }
 
@@ -60,3 +67,5 @@ void OptimizeOneServer(vector<vector<unordered_map<string,int>>>& ans, int serve
     // cout<<end-begin<<"---"<<endl;
 
 }
+
+#endif //QUATERFINAL_ITERATIVEOPTIMIZATION_H

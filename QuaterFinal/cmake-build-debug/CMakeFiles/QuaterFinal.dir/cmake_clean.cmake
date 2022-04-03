@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/QuaterFinal.dir/main.cpp.obj"
+  "CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.obj"
   "QuaterFinal.exe"
   "QuaterFinal.exe.manifest"
   "QuaterFinal.pdb"

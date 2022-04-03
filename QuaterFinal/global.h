@@ -30,12 +30,12 @@
 #include <chrono>
 
 // #define Debug 1
-#define Debug1 1
+#define DEBUG1 1
 
 using namespace std;
 using ll = long long;
 
-const string prefix = "/";
+const string prefix = "";
 
 //基本消耗为V
 int V;
@@ -65,6 +65,7 @@ struct stream_request{
         //return need / client_list[clientId].size() < b.need / client_list[b.clientId].size();
     }
 };
+
 struct stream_request_test{
     string streamId;
     int clientId;

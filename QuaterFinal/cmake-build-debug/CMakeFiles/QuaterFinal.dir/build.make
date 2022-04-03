@@ -65,27 +65,27 @@ include CMakeFiles/QuaterFinal.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/QuaterFinal.dir/flags.make
 
-CMakeFiles/QuaterFinal.dir/main.cpp.obj: CMakeFiles/QuaterFinal.dir/flags.make
-CMakeFiles/QuaterFinal.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\workspace\HuaWeibei\QuaterFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/QuaterFinal.dir/main.cpp.obj"
-	E:\Download\MINGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\QuaterFinal.dir\main.cpp.obj -c E:\workspace\HuaWeibei\QuaterFinal\main.cpp
+CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.obj: CMakeFiles/QuaterFinal.dir/flags.make
+CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.obj: ../CodeCraft-2022.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\workspace\HuaWeibei\QuaterFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.obj"
+	E:\Download\MINGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\QuaterFinal.dir\CodeCraft-2022.cpp.obj -c E:\workspace\HuaWeibei\QuaterFinal\CodeCraft-2022.cpp
 
-CMakeFiles/QuaterFinal.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/QuaterFinal.dir/main.cpp.i"
-	E:\Download\MINGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:\workspace\HuaWeibei\QuaterFinal\main.cpp > CMakeFiles\QuaterFinal.dir\main.cpp.i
+CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.i"
+	E:\Download\MINGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:\workspace\HuaWeibei\QuaterFinal\CodeCraft-2022.cpp > CMakeFiles\QuaterFinal.dir\CodeCraft-2022.cpp.i
 
-CMakeFiles/QuaterFinal.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/QuaterFinal.dir/main.cpp.s"
-	E:\Download\MINGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\workspace\HuaWeibei\QuaterFinal\main.cpp -o CMakeFiles\QuaterFinal.dir\main.cpp.s
+CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.s"
+	E:\Download\MINGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\workspace\HuaWeibei\QuaterFinal\CodeCraft-2022.cpp -o CMakeFiles\QuaterFinal.dir\CodeCraft-2022.cpp.s
 
 # Object files for target QuaterFinal
 QuaterFinal_OBJECTS = \
-"CMakeFiles/QuaterFinal.dir/main.cpp.obj"
+"CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.obj"
 
 # External object files for target QuaterFinal
 QuaterFinal_EXTERNAL_OBJECTS =
 
-QuaterFinal.exe: CMakeFiles/QuaterFinal.dir/main.cpp.obj
+QuaterFinal.exe: CMakeFiles/QuaterFinal.dir/CodeCraft-2022.cpp.obj
 QuaterFinal.exe: CMakeFiles/QuaterFinal.dir/build.make
 QuaterFinal.exe: CMakeFiles/QuaterFinal.dir/linklibs.rsp
 QuaterFinal.exe: CMakeFiles/QuaterFinal.dir/objects1.rsp

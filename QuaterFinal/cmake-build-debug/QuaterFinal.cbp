@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/CodeCraft-2022.cpp">
+			<Option target="QuaterFinal"/>
+		</Unit>
+		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/IterativeOptimization.h">
+			<Option target="QuaterFinal"/>
+		</Unit>
 		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/ProcessInput.h">
 			<Option target="QuaterFinal"/>
 		</Unit>
@@ -87,9 +93,6 @@
 			<Option target="QuaterFinal"/>
 		</Unit>
 		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/global.h">
-			<Option target="QuaterFinal"/>
-		</Unit>
-		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/main.cpp">
 			<Option target="QuaterFinal"/>
 		</Unit>
 		<Unit filename="E:/workspace/HuaWeibei/QuaterFinal/try2average.h">

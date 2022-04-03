@@ -50,13 +50,13 @@ void UseOutServer(int serverId, int time, vector<vector<unordered_map<string,int
 
 //根据服务器关联的最大流的大小排序，从大到小
 vector<pair<int, int>> SortTimeByMaxStream(int serverId, vector<vector<unordered_map<string,int>>> &demand_remain){
-    vector<pair<int, int>> max_stream; //{时间， 最大流}
+    vector<pair<int, int>> max_stream; //{时间， 总流数}
     for(int t=0;t<Times;++t){
         max_stream.emplace_back(t, 0);
         for(int clientId:server_list[serverId]){
             for(auto& stream:demand_remain[t][clientId]){
-                if(stream.second>max_stream[t].second){
-                    max_stream[t].second = stream.second;
+                if(stream.second>boundary){
+                    max_stream[t].second += stream.second;
                 }
             }
         }
