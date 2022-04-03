@@ -25,7 +25,8 @@ vector<int> SortTimeByServerCost(vector<vector<int>> server_total, int serverId)
 
 void OptimizeOneServer(vector<vector<unordered_map<string,int>>>& ans, int serverId, vector<int> &server_p95, vector<vector<int>> &server_total){
     vector<int> sequence = SortTimeByServerCost(server_total, serverId);
-    for(int t:sequence){
+    for(int k = five_percent;k<Times;k++){
+        int t = sequence[k];
         priority_queue<stream_request_test> requests;
         for(int clientId=0;clientId<clientNum;++clientId){
             unordered_map<string, int> stream_list = ans[t][clientId];

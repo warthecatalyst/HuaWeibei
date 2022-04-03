@@ -7,7 +7,7 @@
 
 #include "global.h"
 
-double param = 0.005;//0.001(581119)、0.005(558614)
+double param = 0.001;//0.001(581119)、0.005(558614)
 
 int boundary;
 
