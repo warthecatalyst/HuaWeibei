@@ -49,7 +49,7 @@ double calCostAdd(int sId,double curUsed,double willUse){
 }
 
 vector<vector<int>> GetServerTotal(vector<vector<unordered_map<string,int>>>& ans){
-    
+
     vector<vector<int>> server_total;
     for(int t =0;t<Times;++t){
         vector<int> v(serverNum, 0);
@@ -96,7 +96,7 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
                         best_server = sId;
                         max_remain = server_95per[sId] - curStream.need-curUsed;
                         flag = true;
-                    } 
+                    }
                 }
             }
             if(flag){
@@ -104,7 +104,7 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
                 curDemand[curStream.clientId][curStream.streamId]-=curStream.need;      //更新当前的需求，分配完成的需求不再考虑
                 ans[t][curStream.clientId][curStream.streamId] = best_server;//记录结果
             }
-            
+
             // //如果当前最大流k被分配后没有超过当前边缘节点sId的p95，则分配给边缘节点sId；
             // for(auto& sId: client_list[curStream.clientId]) {
             //     int curUsed = serverID_to_Val[sId].second - curServer[sId]; //当前已经使用的部分
@@ -147,26 +147,24 @@ void try2average(vector<vector<unordered_map<string,int>>> &restDemands, vector<
                     server_95per[sId] = serverID_to_Val[sId].second - curServer[sId] + curStream.need;//更新sId的当前p95
                 }
             }
-            
+
         }
     }
-// #ifdef DEBUG
+#ifdef DEBUG1
     cout<<"--------------befor-------------"<<endl;
     CulCost(server_95per);
 
     cout<<"---------------after-------------"<<endl;
-// #endif
-    for(int l=0;l<1;++l){
+#endif
+    for(int l=0;l<6;++l){
         auto server_total = GetServerTotal(ans);
         for(int i=0;i<serverNum;++i){
             OptimizeOneServer(ans,i, server_95per, server_total);
         }
+#ifdef DEBUG1
         CulCost(server_95per);
+#endif
     }
-    
-// #ifdef DEBUG
-    
-// #endif
 }
 
 
