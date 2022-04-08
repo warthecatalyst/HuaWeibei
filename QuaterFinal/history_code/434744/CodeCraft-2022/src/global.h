@@ -35,7 +35,7 @@
 using namespace std;
 using ll = long long;
 
-const string prefix = "";
+const string prefix = "/";    
 
 //基本消耗为V
 int V;

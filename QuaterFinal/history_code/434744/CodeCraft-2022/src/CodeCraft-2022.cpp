@@ -23,32 +23,16 @@ void solve(){
         ans.push_back(ans_item);
     }
     Process_p5(demand_remain, bandwith_remain, ans);
-    vector<pair<int,int>> vec;
-    for(int day = 0;day<Times;day++){
-        int sum = 0;
-        for(int client = 0;client<clientNum;client++){
-            for(auto& it:demand_remain[day][client]){
-                sum+=it.second;
-            }
-        }
-        vec.emplace_back(day,sum);
-    }
-    sort(vec.begin(),vec.end(),[&](const pair<int,int>& a,const pair<int,int>& b){
-        return a.second>b.second;
-    });
-    for(auto &v:vec){
-        cout<<"day"<<v.first<<":"<<v.second<<endl;
-    }
     try2average(demand_remain,bandwith_remain,ans);
     output(ans);
 }
 
 
 int main() {
-
+    
     ProcessInput();
     solve();
-
+    
 
     return 0;
 }

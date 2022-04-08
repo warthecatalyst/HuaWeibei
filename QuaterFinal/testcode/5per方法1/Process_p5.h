@@ -9,7 +9,7 @@
 
 // double param = 0.001;//0(513148)、0.001(498252)、0.002（515121）、0.005(539513)
 int boundary;
-double param = 1;
+double param = 0.183;
 //10^8的搜索范围:0.2(506206)、、0.21（498008）、0.22（497753）、0.19（496650）、0.17（494161）、0.18（487281）、0.185（477389）、0.184（474509）、0.184-6（474218）、0.182-6（472836）、0.183-6（472185）、0.1835-6（472185）
 bool CompBandwith(int s1, int s2){
     return serverID_to_Val[s1].second>serverID_to_Val[s2].second;
@@ -54,35 +54,29 @@ void UseOutServer(int serverId, int time, vector<vector<unordered_map<string,int
 
 //根据服务器关联的最大流的大小排序，从大到小
 vector<int> SortTimeByMaxStream(int serverId, vector<vector<unordered_map<string,int>>> &demand_remain){
-    vector<pair<int, int>> max_stream; //{周围总流数，当天总流数}
+    vector<pair<int, int>> max_stream; //{流总数， 最大流}
     vector<int> TimeSort;
     TimeSort.reserve(Times);
     for(int t=0;t<Times;++t){
         TimeSort.push_back(t);
-        int StreamSum = 0;
+        int Maxstream = 0;      //当天的最大流
+        int StreamSum = 0;      //当天的流总和
         for(int clientId:server_list[serverId]){
             for(auto& stream:demand_remain[t][clientId]){
                 if(stream.second>boundary){
                     StreamSum += stream.second;
+                    if(stream.second>Maxstream){
+                        Maxstream = stream.second;
+                    }
                 }
             }
         }
-        if(StreamSum>=serverID_to_Val[serverId].second){    //计算当日所有流
-            int TotalStream = 0;
-            for(int client = 0;client<clientNum;client++){
-                for(auto& it:demand_remain[t][client]){
-                    TotalStream+=it.second;
-                }
-            }
-            max_stream.emplace_back(StreamSum,TotalStream);
-        }else{
-            max_stream.emplace_back(StreamSum,0);
-        }
+        max_stream.emplace_back(StreamSum,Maxstream);
     }
+
 //    sort(max_stream.begin(), max_stream.end(), [&](pair<int,int> a, pair<int, int> b){
 //        return a.second>b.second;
 //    });
-
     sort(TimeSort.begin(),TimeSort.end(),[&](const int& a,const int& b){
         if(max_stream[a].first>=serverID_to_Val[serverId].second&&max_stream[b].first>=serverID_to_Val[serverId].second){
             return max_stream[a].second>max_stream[b].second;

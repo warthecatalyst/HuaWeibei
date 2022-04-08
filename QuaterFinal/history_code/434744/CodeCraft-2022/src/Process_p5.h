@@ -9,7 +9,7 @@
 
 // double param = 0.001;//0(513148)、0.001(498252)、0.002（515121）、0.005(539513)
 int boundary;
-double param = 1;
+double param = 0.2;
 //10^8的搜索范围:0.2(506206)、、0.21（498008）、0.22（497753）、0.19（496650）、0.17（494161）、0.18（487281）、0.185（477389）、0.184（474509）、0.184-6（474218）、0.182-6（472836）、0.183-6（472185）、0.1835-6（472185）
 bool CompBandwith(int s1, int s2){
     return serverID_to_Val[s1].second>serverID_to_Val[s2].second;
@@ -23,7 +23,7 @@ bool CompBandwith(int s1, int s2){
 void UseOutServer(int serverId, int time, vector<vector<unordered_map<string,int>>> &demand_remain, vector<vector<int>> &bandwith_remain, vector<vector<unordered_map<string,int>>> &result){
 #ifdef Debug
     cout<<"------------------"<<endl;
-    cout<<"day:"<<time<<", serverId:"<<serverId<<endl;
+    cout<<"day:"<<time<<", serverId:"<<srverId<<endl;
 #endif
     //把关联的所有流按照需求大小排序，从大到小
     priority_queue<stream_request_test> request_queue;
